@@ -6,7 +6,8 @@
   "description": "Gets current youtube page's videoId",
   "permissions": [
     "tabs",
-    "activeTab"
+    "activeTab",
+    "*://*/sentiment/*"
   ],
   "background": {
     "scripts": ["background.js"],
