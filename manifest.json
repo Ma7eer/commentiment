@@ -7,7 +7,8 @@
   "permissions": [
     "tabs",
     "activeTab",
-    "*://*/sentiment/*"
+    "*://*/sentiment/*",
+    "./charts.js"
   ],
   "background": {
     "scripts": ["background.js"],
