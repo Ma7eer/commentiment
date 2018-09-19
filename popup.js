@@ -1,12 +1,7 @@
 const videoIdQueryParamId = 'v';
 
 /* returns youtube video id from youtube url */
-const getVideoId = url => {
-  let usp = new URL(url);
-  let params = new URLSearchParams(usp.search);
-  let id = params.get('v');
-  return params.get('v');
-};
+const getVideoId = params => params.get(videoIdQueryParamId);
 
 /* uses chartsjs to create a doughnut chart*/
 const createDoughnutChart = (positive, negative) => {
@@ -30,9 +25,9 @@ const createDoughnutChart = (positive, negative) => {
 negative ones */
 const commentsDataCalcs = (positiveScores, negativeScores) => {
   if(positiveScores.length > 0 && negativeScores.length > 0) {
-  let sumPos = positiveScores.reduce((previous, current) => current += previous);
+  let sumPos = positiveScores.reduce((prev, curr) => curr + prev);
   let avgPos = (sumPos / positiveScores.length);
-  let sumNeg = negativeScores.reduce((previous, current) => current += previous);
+  let sumNeg = negativeScores.reduce((prev, curr) => curr + prev);
   let avgNeg = (sumNeg / negativeScores.length);
   let maxVal = avgPos + (-avgNeg);
   let positive = (avgPos*(100/maxVal)).toFixed(0);
@@ -47,9 +42,12 @@ const commentsDataCalcs = (positiveScores, negativeScores) => {
 
 chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
   let videoId;
+  let url = tabs[0].url;
+  let usp = new URL(url);
+  let params = new URLSearchParams(usp.search);
 
-  if (tabs[0].url.includes(videoIdQueryParamId + '=')) {
-    videoId = getVideoId(tabs[0].url);
+  if (url.includes('https://www.youtube.com/watch?v=')) {
+    videoId = getVideoId(params);
 
     // xmlhttp request
     var xhr = new XMLHttpRequest();
@@ -58,16 +56,9 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
       if (xhr.readyState == 4) {
         const response = JSON.parse(xhr.responseText);
         let resArray = [];
-        let positiveScores = [];
-        let negativeScores = [];
         resArray.push(response);
-        resArray[0].forEach(val => {
-          if(val.score > 0) {
-            positiveScores.push(val.score);
-          } else {
-            negativeScores.push(val.score);
-          }
-        });
+        let positiveScores = resArray[0].filter(id => id.score > 0).map(id => id.score);
+        let negativeScores = resArray[0].filter(id => id.score < 0).map(id => id.score);
         let percentPositive = commentsDataCalcs(positiveScores, negativeScores)[0];
         let percentNegative = commentsDataCalcs(positiveScores, negativeScores)[1];
 
