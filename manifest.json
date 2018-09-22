@@ -8,10 +8,12 @@
     "tabs",
     "activeTab",
     "*://*/sentiment/*",
-    "./charts.js"
+    "./charts.js",
+    "./css/*",
+    "./js/*"
   ],
   "background": {
-    "scripts": ["background.js"],
+    "scripts": ["background.js", "js/jquery.js", "js/popper.js"],
     "persistent": false
   },
   "browser_action": {
