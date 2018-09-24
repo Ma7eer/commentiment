@@ -6,7 +6,7 @@ export const createDoughnutChart = (positive, negative) => {
       labels: [ "Positive", "Negative"],
       datasets: [{
           label: "Youtube Comment Sentiment",
-          backgroundColor: ["green", "red"],
+          backgroundColor: ["#28a745", "#dc3545"],
           borderColor: "white",
           data: [positive, negative],
       }]
@@ -15,7 +15,17 @@ export const createDoughnutChart = (positive, negative) => {
 });
 }
 
-var ctx2 = document.getElementById('myChart2').getContext('2d');
+// export const createPieChart = () => {
+//   var ctx2 = document.getElementById('myChart2').getContext('2d');
+//   // For a pie chart
+// var myPieChart = new Chart(ctx2,{
+//   type: 'pie',
+//   data: data,
+//   options: {}
+// });
+// }
+
+// var ctx2 = document.getElementById('myChart2').getContext('2d');
 var ctx3 = document.getElementById('myChart3').getContext('2d');
 var data = {
   datasets: [{
@@ -32,11 +42,21 @@ var data = {
 };
 
 // For a pie chart
-var myPieChart = new Chart(ctx2,{
-  type: 'pie',
-  data: data,
-  options: {}
-});
+// var myPieChart = new Chart(ctx2,{
+//   type: 'pie',
+//   data: {
+//     datasets: [{
+//         data: [[10, 20, 50], [20, 30, 40], [30, 90, 60]],
+//         backgroundColor: ["green", "red", "blue"]
+//     }],
+//     // These labels appear in the legend and in the tooltips when hovering different arcs
+//     labels: [
+//         'Red',
+//         'Yellow',
+//         'Blue'
+//     ],
+//   options: {}
+// }});
 
 // And for a doughnut chart
 var myDoughnutChart = new Chart(ctx3, {

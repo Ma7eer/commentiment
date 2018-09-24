@@ -11,6 +11,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="./css/bootstrap.css">
+    <style>
+      body {
+        padding: 10px;
+      }
+    </style>
 
     <script src="./js/jquery.js"></script>
     <script src="./js/popper.js"></script>
@@ -23,10 +28,12 @@
   <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
+        <label class="text-center">Positive comments vs negative comments</label>
         <canvas id="myChart1" width="400" height="400"></canvas>
         <!-- <img class="d-block w-100" src="https://via.placeholder.com/350x150" alt="First slide"> -->
       </div>
       <div class="carousel-item">
+          <label class="text-center">Most common words that convey sentiment</label>
         <canvas id="myChart2" width="400" height="400"></canvas>
         <!-- <img class="d-block w-100" src="https://via.placeholder.com/350x150" alt="Second slide"> -->
       </div>
