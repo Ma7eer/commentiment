@@ -26,7 +26,7 @@ chrome.tabs.query({
     videoId = getVideoId(params);
 
     // xmlhttp request
-    var xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     xhr.open("GET", `https://commentiment.herokuapp.com/sentiment/yt?id=${videoId}`, true);
     xhr.onreadystatechange = function () {
       if (xhr.readyState == 4) {
